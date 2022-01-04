@@ -1,0 +1,70 @@
+ex01:
+Write a function that returns the sum of the size of the three strings
+passed as parameter.
+Expected prototype:
+    size_t total_size(std::string, std::string, std::string)
+
+ex02:
+Write a function that outputs to the error output the value of an integer passed
+as a parameter.
+Expected prototype:
+    void log_value(int)
+Example output for input (3):
+    DEBUG: 3
+
+ex03:
+Write a function that outputs a message to the error output.
+Expected prototype:
+    void log_error(std:string message)
+Example output:
+    ERROR : this is a test message
+    
+ex04:
+Write a function that returns a c-style array of strings representing numbers
+counting from the first parameter to the second. It should produce an increasing
+or decreasing sequence depending on the order of the values.
+Expected prototype:
+    std::string* sequence_as_strings(int, int)
+Example return for (3, 5):
+    {"3", "4", "5"}
+
+ex05:
+Write a function that allocates 100 empty strings and returns an array
+containing all 100 pointers.
+Expected prototype:
+    std::string** hundred_string_pointers()
+    
+ex06:
+Write a function that frees the memory of the 100 strings allocated in the 
+previous function.
+Expected prototype:
+    void free_hundred_strings(std::string**)
+
+ex07:
+Write a function that prints to a file the x first numbers of the Fibonnaci
+sequence, line by line.
+Expected prototype:
+    void record_fibonnaci(std::string filename, size_t values)
+    
+ex08:
+Write a function that prints to the standard output the numbers x to y of the Fibbonnaci sequence, line by line. It should get its data from the file which name is specified, and compute only the missing values form it.
+If there are missing values, it should write them back to the file.
+NB: If the file contains wrong values, the output will inevitably be wrong.
+Expected prototype:
+    void print_fibonnaci(int first, int last, std::string file)
+
+ex09:
+Write a function that checks if a file is a valid fibonnaci file, as used on
+the previous exercices.
+Expected prototype:
+    bool check_fibonnaci_file(std::string filename)
+
+
+ex10:
+Consider a global variable std::vector<std::string>> numbers_in_french.  
+Write a function that returns the name of a number in french, getting it from the vector if it inside, or computing it form the other values if not.  
+The resulting value should be emplaced at the correct index in the array if it
+wasn't.  
+It should work for values form -999 999 999 to 999 999 999
+Expected prototype:
+    std::string get_number_in_french(long)
