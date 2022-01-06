@@ -8,5 +8,7 @@ int main()
 
     s_number sc = sa + sb;
 
+    std::cout << sc._value << std::endl;
+
     return 0;
 }

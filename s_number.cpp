@@ -4,6 +4,7 @@
 // TEMP
 
 #include <iostream>
+int ctoi(const char);
 
 // TEMP
 
@@ -27,10 +28,10 @@ s_number operator+(const s_number& a, const s_number& b)
         int bot = 0;
 
         if(i < aLen)
-            top = a._value[aLen - (i + 1)] - '0';
+            top = ctoi(a._value[aLen - (i + 1)]);
 
         if(i < bLen)
-            bot = b._value[bLen - (i + 1)] - '0';
+            bot = ctoi(b._value[bLen - (i + 1)]);
 
         som = top + bot + ret;
         ret = 0;
@@ -38,12 +39,19 @@ s_number operator+(const s_number& a, const s_number& b)
         if(som > 9)
         {
             std::string ssom = std::to_string(som);
+            som = ctoi(ssom[ssom.length() - 1]);
+            ssom.erase(ssom.length() - 1, 1);
+            ret = std::stoi(ssom);
         }
 
-        std::cout << som << std::endl;
-
+        result._value.insert(0, std::to_string(som));
         i++;
     }
 
     return result;
+}
+
+int ctoi(const char c)
+{
+    return c - '0';
 }
