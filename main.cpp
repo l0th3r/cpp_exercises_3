@@ -3,8 +3,8 @@
 
 int main()
 {
-    s_number sa = {"125"};
-    s_number sb = {"455"};
+    s_number sa = {"176"};
+    s_number sb = {"453"};
 
     s_number sc = sa + sb;
 

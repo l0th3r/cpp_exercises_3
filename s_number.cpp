@@ -51,6 +51,16 @@ s_number operator+(const s_number& a, const s_number& b)
     return result;
 }
 
+s_number operator-(const s_number& a, const s_number& b)
+{
+    s_number result;
+
+
+
+
+    return result;
+}
+
 int ctoi(const char c)
 {
     return c - '0';
