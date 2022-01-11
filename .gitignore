@@ -74,3 +74,6 @@ Thumbs.db
 # Build folder
 build-*/
 
+#CMAKE
+CMakeLists.txt.*
+CMakeLists.txt.user*
