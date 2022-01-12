@@ -7,7 +7,8 @@ struct s_number {std::string _value;};
 
 s_number operator+(const s_number& a, const s_number& b);
 s_number operator-(const s_number& a, const s_number& b);
-
+s_number operator+(const s_number& a);
+s_number operator-(const s_number& a);
 
 
 #endif // S_NUMBER_H

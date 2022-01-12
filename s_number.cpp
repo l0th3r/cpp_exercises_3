@@ -23,6 +23,22 @@ s_number operator-(const s_number& a, const s_number& b)
     return sub(a, b);
 }
 
+s_number operator+(const s_number& a)
+{
+    return a;
+}
+
+s_number operator-(const s_number& a)
+{
+    s_number res = a;
+
+    if(a._value[0] != '-')
+        res._value.insert(0, "-");
+    else
+        res._value.erase(0, 1);
+
+    return res;
+}
 
 // tools
 int ctoi(const char c)
