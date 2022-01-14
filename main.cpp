@@ -5,9 +5,9 @@
 
 int main()
 {
-    s_number sa = {"-5"};
-    s_number sb = {"576"};
-    s_number sc = -sa;
+    s_number sa = {"999"};
+    s_number sb = {"32"};
+    s_number sc = sa*sb;
 
     std::cout << sc._value << std::endl;
 
