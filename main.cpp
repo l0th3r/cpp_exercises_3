@@ -5,11 +5,11 @@
 
 int main()
 {
-    s_number sa = {"999"};
-    s_number sb = {"32"};
-    s_number sc = sa*sb;
+    s_number sa = {"92"};
+    s_number sb = {"92"};
+    s_number sc = sa / sb;
 
-    std::cout << sc._value << std::endl;
+    std::cout << (sa <= sb) << std::endl;
 
     return 0;
 }

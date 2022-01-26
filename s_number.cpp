@@ -4,12 +4,12 @@
 
 int ctoi(const char);
 void clean_snumber(s_number& snb);
+void equilibrate_length(s_number& sa, s_number& sb);
 
 s_number add(const s_number& a, const s_number& b);
 s_number sub(const s_number& a, const s_number& b);
 s_number mul(const s_number& a, const s_number& b);
-s_number div(const s_number& a, const s_number& b);
-s_number mod(const s_number& a, const s_number& b);
+void div(const s_number& a, const s_number& b, s_number& result, s_number& rest);
 
 // tools
 int ctoi(const char c)
@@ -26,7 +26,6 @@ void clean_snumber(s_number& snb)
 
     while(snb._value[start] == '0')
     {
-        std::cout << snb._value << std::endl;
         snb._value.erase(start, 1);
     }
 
@@ -34,20 +33,123 @@ void clean_snumber(s_number& snb)
         snb._value = "0";
 }
 
+void equilibrate_length(s_number& sa, s_number& sb)
+{
+    if(sa._value.length() > sb._value.length())
+    {
+        while(sa._value.length() != sb._value.length())
+        {
+            sb._value.insert(0, "0");
+        }
+    }
+    else if(sb._value.length() > sa._value.length())
+    {
+        while(sb._value.length() != sa._value.length())
+        {
+            sa._value.insert(0, "0");
+        }
+    }
+}
+//tools
+
+
+
+// conditional operators
+
+bool operator==(const s_number& a, const s_number& b)
+{
+    return (a._value == b._value);
+}
+
+bool operator!=(const s_number& a, const s_number& b)
+{
+    return !(a == b);
+}
+
+bool operator>(const s_number& a, const s_number& b)
+{
+    bool res = false;
+    s_number sa = a;
+    s_number sb = b;
+
+    clean_snumber(sa);
+    clean_snumber(sb);
+    equilibrate_length(sa, sb);
+
+    int i = 0;
+    int ia = 0;
+    int ib = 0;
+
+    while(ia == ib && i < (int)sa._value.length())
+    {
+        ia = ctoi(sa._value[i]);
+        ib = ctoi(sb._value[i]);
+
+        if(ia > ib)
+            res = true;
+
+        i++;
+    }
+
+    return res;
+}
+
+bool operator>=(const s_number& a, const s_number& b)
+{
+    bool res = (a > b);
+
+    if(!res)
+    {
+        res = (a == b);
+    }
+
+    return res;
+}
+
+bool operator<(const s_number& a, const s_number& b)
+{
+    if(a == b)
+        return false;
+    else
+        return (b > a);
+}
+
+bool operator<=(const s_number& a, const s_number& b)
+{
+    if(a == b)
+        return true;
+    else
+        return (b > a);
+}
+
+// conditional operators
+
+
 // operators
+
+// +
 s_number operator+(const s_number& a, const s_number& b)
 {
+    // handle negative numbers
     return add(a, b);
 }
 
-s_number operator-(const s_number& a, const s_number& b)
+s_number operator+(const s_number& a, const int& b)
 {
-    return sub(a, b);
+    s_number sb = {std::to_string(b)};
+    return add(a, sb);
 }
 
 s_number operator+(const s_number& a)
 {
     return a;
+}
+
+// -
+s_number operator-(const s_number& a, const s_number& b)
+{
+    // handle negative numbers
+    return sub(a, b);
 }
 
 s_number operator-(const s_number& a)
@@ -62,13 +164,51 @@ s_number operator-(const s_number& a)
     return res;
 }
 
+// *
 s_number operator*(const s_number& a, const s_number& b)
 {
+    // handle negative numbers
     return mul(a, b);
 }
 
+// /
+s_number operator/(const s_number& a, const s_number& b)
+{
+    s_number result;
+    s_number rest;
+
+    // handle negative numbers
+    div(a, b, result, rest);
+
+    return result;
+}
+
+s_number operator%(const s_number& a, const s_number& b)
+{
+    s_number result;
+    s_number rest;
+
+    // handle negative numbers
+    div(a, b, result, rest);
+
+    return rest;
+}
+// operators
+
 
 // algorithms
+void div(const s_number& a, const s_number& b, s_number& result, s_number& rest)
+{
+    result = {"0"};
+    rest = a;
+
+    while(rest >= b)
+    {
+        rest = rest - b;
+        result = result + 1;
+    }
+}
+
 s_number mul(const s_number& a, const s_number& b)
 {
     s_number result;
@@ -213,6 +353,21 @@ s_number add(const s_number& a, const s_number& b)
         i++;
     }
 
+    if(ret > 0)
+        result._value.insert(0, std::to_string(ret));
+
     return result;
 }
 
+// stream
+std::ostream& operator<<(std::ostream& s, const s_number& a)
+{
+    s << a._value;
+    return s;
+}
+
+std::istream& operator>>(std::istream& s, s_number& a)
+{
+    s >> a._value;
+    return s;
+}
